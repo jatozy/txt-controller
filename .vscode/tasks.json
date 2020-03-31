@@ -1,0 +1,74 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "prepare",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceRoot}"
+            },
+            "command": "rm -Rf build ; mkdir build ; mkdir build/debug ; mkdir build/release",
+            "problemMatcher": []
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+        },
+        {
+            "label": "cmake_debug",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceRoot}/build/debug"
+            },
+            "command": "cmake -G \"Unix Makefiles\" -DCMAKE_BUILD_TYPE=Debug ${workspaceRoot}",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "build_debug",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceRoot}/build/debug"
+            },
+            "command": "cmake --build .",
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "cmake_release",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceRoot}/build/release"
+            },
+            "command": "cmake -G \"Unix Makefiles\" -DCMAKE_BUILD_TYPE=Release ${workspaceRoot}",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "build_release",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceRoot}/build/release"
+            },
+            "command": "cmake --build .",
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}

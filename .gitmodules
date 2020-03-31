@@ -1,0 +1,3 @@
+[submodule "3rdParty/txt_demo_c_download"]
+	path = 3rdParty/txt_demo_c_download
+	url = https://github.com/fischertechnik/txt_demo_c_download
