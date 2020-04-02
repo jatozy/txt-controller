@@ -1,0 +1,16 @@
+{
+    "configurations": [
+      {
+        "name": "GCC",
+        "includePath": [
+            "${workspaceFolder}/**"
+        ],
+        "defines": [],
+        "compilerPath": "/opt/compiler/bin/arm-linux-gnueabihf-g++",
+        "cStandard": "c11",
+        "cppStandard": "c++17",
+        "intelliSenseMode": "gcc-x86"
+      }
+    ],
+    "version": 4
+  }
