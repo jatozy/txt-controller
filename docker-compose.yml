@@ -3,6 +3,7 @@ version: '3'
 services:
   toolchain:
     container_name: txt_controller_cross_compiler
+    image: txt_controller_cross_compiler
     build: 
       context: .
       dockerfile: Dockerfile
