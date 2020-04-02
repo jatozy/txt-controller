@@ -1,0 +1,19 @@
+language: cpp
+
+services:
+  - docker
+
+env:
+  - DOCKER_COMPOSE_VERSION=1.25.4
+
+before_install:
+  - sudo rm /usr/local/bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
+  - docker-compose up -d
+  
+script:
+  - docker exec -it txt_controller_cross_compiler bash -c 'cd /workspace ; rm -Rf build ; mkdir build ; mkdir build/release'
+  - docker exec -it txt_controller_cross_compiler bash -c 'cd /workspace/build/release ; cmake -G \"Unix Makefiles\" -DCMAKE_BUILD_TYPE=Release /workspace'
+  - docker exec -it txt_controller_cross_compiler bash -c 'cd /workspace/build/release ; cmake --build .'
