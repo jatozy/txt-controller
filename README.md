@@ -3,3 +3,6 @@ A Wrapper for the C implementation and precompiled library of the txt controller
 
 # Build the Software
 The binaries for the Fischertechnik TXT-Controller can be compiled in the Docker container which will be build with the toplevel Dockerfile.
+The docker-compose file on the toplevel will build the container and will mount the toplevel folder as /workspace inside the container.
+
+This docker-compose file is the base for VS code and for the CI.
