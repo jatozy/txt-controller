@@ -15,5 +15,5 @@ before_install:
   
 script:
   - docker exec -it txt_controller_cross_compiler bash -c 'cd /workspace ; rm -Rf build ; mkdir build ; mkdir build/release'
-  - docker exec -it txt_controller_cross_compiler bash -c 'cd /workspace/build/release ; cmake -G \"Unix Makefiles\" -DCMAKE_BUILD_TYPE=Release /workspace'
+  - docker exec -it txt_controller_cross_compiler bash -c 'cd /workspace/build/release ; cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release /workspace'
   - docker exec -it txt_controller_cross_compiler bash -c 'cd /workspace/build/release ; cmake --build .'
