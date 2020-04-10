@@ -8,7 +8,7 @@
                 "cwd": "${workspaceRoot}"
             },
             "command": "rm -Rf build ; mkdir build ; mkdir build/debug ; mkdir build/release",
-            "problemMatcher": []
+            "problemMatcher": [],
             "group": {
                 "kind": "build",
                 "isDefault": true
