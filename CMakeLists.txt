@@ -1,4 +1,7 @@
-cmake_minimum_required(VERSION 3.10.0)
+cmake_minimum_required(VERSION 3.13.0)
+
+OPTION(BUILD_TESTS "Build unit tests" OFF)
+OPTION(BUILD_FOR_CONTROLLER "Build cross for TXT Controller" OFF)
 
 set(CMAKE_SYSTEM_NAME Linux)
 set(CMAKE_SYSTEM_PROCESSOR arm)
