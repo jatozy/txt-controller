@@ -20,7 +20,7 @@
             "options": {
                 "cwd": "${workspaceRoot}/build/debug"
             },
-            "command": "cmake -G \"Unix Makefiles\" -DCMAKE_BUILD_TYPE=Debug ${workspaceRoot}",
+            "command": "cmake -G \"Unix Makefiles\" -DBUILD_FOR_CONTROLLER=ON -DCMAKE_BUILD_TYPE=Debug ${workspaceRoot}",
             "problemMatcher": [],
             "group": {
                 "kind": "build",
@@ -48,7 +48,7 @@
             "options": {
                 "cwd": "${workspaceRoot}/build/release"
             },
-            "command": "cmake -G \"Unix Makefiles\" -DCMAKE_BUILD_TYPE=Release ${workspaceRoot}",
+            "command": "cmake -G \"Unix Makefiles\" -DBUILD_FOR_CONTROLLER=ON -DCMAKE_BUILD_TYPE=Release ${workspaceRoot}",
             "problemMatcher": [],
             "group": {
                 "kind": "build",
