@@ -1,7 +1,7 @@
 add_executable(${CMAKE_PROJECT_NAME} main.cpp)
 set_property(TARGET ${CMAKE_PROJECT_NAME} PROPERTY CXX_STANDARD 14)
 
-include(TxtCInterface.cmake)
+include(${PROJECT_SOURCE_DIR}/src/TxtCInterface.cmake)
 
 target_link_libraries(${CMAKE_PROJECT_NAME}
     PRIVATE KeLibTxt
