@@ -7,7 +7,7 @@
             "options": {
                 "cwd": "${workspaceRoot}"
             },
-            "command": "rm -Rf build ; mkdir build ; mkdir build/debug ; mkdir build/release",
+            "command": "rm -Rf build ; mkdir build ; mkdir build/debug ; mkdir build/release ; mkdir build/test_debug ; mkdir build/test_release",
             "problemMatcher": [],
             "group": {
                 "kind": "build",
@@ -28,10 +28,38 @@
             }
         },
         {
+            "label": "cmake_test_debug",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceRoot}/build/test_debug"
+            },
+            "command": "cmake -G \"Unix Makefiles\" -DBUILD_TESTS=ON -DCMAKE_BUILD_TYPE=Debug ${workspaceRoot}",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
             "label": "build_debug",
             "type": "shell",
             "options": {
                 "cwd": "${workspaceRoot}/build/debug"
+            },
+            "command": "cmake --build .",
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "build_test_debug",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceRoot}/build/test_debug"
             },
             "command": "cmake --build .",
             "problemMatcher": [
@@ -56,10 +84,38 @@
             }
         },
         {
+            "label": "cmake_test_release",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceRoot}/build/test_release"
+            },
+            "command": "cmake -G \"Unix Makefiles\" -DBUILD_TESTS=ON -DCMAKE_BUILD_TYPE=Release ${workspaceRoot}",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
             "label": "build_release",
             "type": "shell",
             "options": {
                 "cwd": "${workspaceRoot}/build/release"
+            },
+            "command": "cmake --build .",
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "build_test_release",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceRoot}/build/test_release"
             },
             "command": "cmake --build .",
             "problemMatcher": [

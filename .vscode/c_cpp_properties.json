@@ -3,7 +3,8 @@
       {
         "name": "GCC",
         "includePath": [
-            "${workspaceFolder}/**"
+            "${workspaceFolder}/**",
+            "${workspaceFolder}/includes/"
         ],
         "defines": [],
         "compilerPath": "/opt/compiler/bin/arm-linux-gnueabihf-g++",
