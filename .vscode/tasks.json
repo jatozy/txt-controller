@@ -125,6 +125,36 @@
                 "kind": "build",
                 "isDefault": true
             }
+        },
+        {
+            "label": "run_tests_debug",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceRoot}/build/test_debug"
+            },
+            "command": "ctest -V",
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "run_tests_release",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceRoot}/build/test_release"
+            },
+            "command": "ctest -V",
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
         }
     ]
 }

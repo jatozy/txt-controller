@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.13.0)
 
+project (TxtController)
+
 OPTION(BUILD_TESTS "Build unit tests" OFF)
 OPTION(BUILD_FOR_CONTROLLER "Build cross for TXT Controller" OFF)
 
@@ -9,8 +11,8 @@ elseif(NOT BUILD_TESTS AND NOT BUILD_FOR_CONTROLLER)
     message( FATAL_ERROR "You must set one of the flags BUILD_TESTS or BUILD_FOR_CONTROLLER.")
 elseif(BUILD_TESTS)
 #	set(VERSION_GTEST "1.8.0" CACHE STRING "Google Test framework version")
-#	enable_testing()
-#	add_subdirectory(3rdParty/gtest)
+	enable_testing()
+	add_subdirectory(3rdParty/googletest)
     add_subdirectory(unitTests)
 elseif(BUILD_FOR_CONTROLLER)
     set(CMAKE_SYSTEM_NAME Linux)
@@ -25,7 +27,5 @@ elseif(BUILD_FOR_CONTROLLER)
     set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
     set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
 endif()
-
-project (TxtController)
 
 add_subdirectory(src)
