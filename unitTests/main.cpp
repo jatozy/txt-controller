@@ -47,7 +47,7 @@ TEST_P(PrepareMotor1, DataIsSet)
 }
 
 INSTANTIATE_TEST_CASE_P(
-    Controller,
+    ControllerUnitTests,
     PrepareMotor1,
     ::testing::Values(
         std::make_tuple("One_Rotation_Counter_Clockwise_Full_Speed", 127, 512, 0),
@@ -93,7 +93,7 @@ TEST_P(PrepareMotor2, DataIsSet)
 }
 
 INSTANTIATE_TEST_CASE_P(
-    Controller,
+    ControllerUnitTests,
     PrepareMotor2,
     ::testing::Values(
         std::make_tuple("One_Rotation_Counter_Clockwise_Full_Speed", 127, 512, 0),
@@ -148,7 +148,7 @@ TEST_P(RotateMotors, DataIsSet)
 }
 
 INSTANTIATE_TEST_CASE_P(
-    Controller,
+    ControllerUnitTests,
     RotateMotors,
     ::testing::Values(std::make_tuple("Move_no_Motor", false, false),
                       std::make_tuple("Move_Motor1_not_Motor2", true, false),

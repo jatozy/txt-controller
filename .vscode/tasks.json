@@ -162,7 +162,7 @@
             "options": {
                 "cwd": "${workspaceRoot}/build/test_debug"
             },
-            "command": "cmake --build . && ctest -V",
+            "command": "cmake --build . && ctest -V --exclude-regex \".*IntegrationTests.*\"",
             "problemMatcher": [
                 "$gcc"
             ],
