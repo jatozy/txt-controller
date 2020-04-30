@@ -1,6 +1,16 @@
-#include <TxtController/Controller.hpp>
+#include "TxtController/Controller.hpp"
 
-int jatozy::TxtController::Controller::getVersion() const
+// clang-format off
+#include <KeLibTxtDl.h>
+#include <FtShmem.h>
+// clang-format on
+
+jatozy::TxtController::Controller::Controller(FISH_X1_TRANSFER* hardwareInterface)
 {
-    return 1;
+}
+
+void jatozy::TxtController::Controller::PrepareMotor1(uint16_t distance,
+                                                      int16_t rotationSpeed1,
+                                                      int16_t rotationSpeed2)
+{
 }

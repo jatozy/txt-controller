@@ -1,14 +1,28 @@
+// clang-format off
+#include <KeLibTxtDl.h>
+#include <FtShmem.h>
+// clang-format on
+
 #include <gtest/gtest.h>
-#include <string>
+
+#include "TxtController/Controller.hpp"
 
 namespace {
-TEST(Exampletest, FirstTestWithTheWorstNameEver)
+TEST(Controller, PrepareMotor1_Rotate1TimesWithMaximumSpeedCounterClockwise)
 {
-    const std::string s;
+    const uint16_t distance{127};
+    const int16_t rotationSpeed1{512};
+    const int16_t rotationSpeed2{0};
 
-    EXPECT_STREQ("", s.c_str());
+    FISH_X1_TRANSFER hardwareInterface;
+    jatozy::TxtController::Controller sut(&hardwareInterface);
 
-    EXPECT_EQ(0u, s.length());
+    // Here starts the test.
+    sut.PrepareMotor1(distance, rotationSpeed1, rotationSpeed2);
+
+    EXPECT_EQ(distance, hardwareInterface.ftX1out.distance[0]);
+    EXPECT_EQ(rotationSpeed1, hardwareInterface.ftX1out.duty[0]);
+    EXPECT_EQ(rotationSpeed2, hardwareInterface.ftX1out.duty[1]);
 }
 } // namespace
 
