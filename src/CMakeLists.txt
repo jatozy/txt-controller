@@ -1,8 +1,6 @@
 add_library(${CMAKE_PROJECT_NAME} SHARED Controller.cpp)
 set_property(TARGET ${CMAKE_PROJECT_NAME} PROPERTY CXX_STANDARD 14)
 
-include_directories(BEFORE ${PROJECT_SOURCE_DIR}/includes)
-
 include(${CMAKE_SOURCE_DIR}/3rdParty/TxtCInterface.cmake)
 
 if(BUILD_TESTS)
