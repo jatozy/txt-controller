@@ -3,10 +3,7 @@ version: '3'
 services:
   toolchain:
     container_name: txt_controller_cross_compiler
-    image: txt_controller_cross_compiler
-    build: 
-      context: .
-      dockerfile: Dockerfile
+    image: e6r4de7ly3x6ws3g/txt-controller-toolchain:latest
     volumes:
       - .:/workspace
     command: /bin/sh -c "while sleep 1000; do :; done"
