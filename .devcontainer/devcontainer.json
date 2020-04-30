@@ -3,5 +3,12 @@
 	"service": "toolchain",
 	"workspaceFolder": "/workspace",
 	"forwardPorts": [],
-	"extensions": []
+	"extensions": [ 
+		"twxs.cmake",
+		"ms-vscode.cpptools",
+		"austin.code-gnu-globa",
+		"donjayamanne.githistory",
+		"felipecaputo.git-project-manager",
+		"eamodio.gitlens"
+	]
 }

@@ -1,19 +1,52 @@
+os: linux
+dist: bionic
 language: cpp
 
 services:
   - docker
 
 env:
-  - DOCKER_COMPOSE_VERSION=1.25.4
+  global:
+    - DOCKER_COMPOSE_VERSION=1.25.4
+    - DOCKER_CACHE_FOLDER=${HOME}/docker-images
+    - DOCKER_CONTAINER_NAME=txt_controller_cross_compiler
+    - DOCKER_CACHE_FILE=${HOME}/docker-images/${DOCKER_CONTAINER_NAME}.tgz
 
-before_install:
-  - sudo rm /usr/local/bin/docker-compose
-  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
-  - chmod +x docker-compose
-  - sudo mv docker-compose /usr/local/bin
-  - docker-compose up -d
-  
-script:
-  - docker exec -it txt_controller_cross_compiler bash -c 'cd /workspace ; rm -Rf build ; mkdir build ; mkdir build/release'
-  - docker exec -it txt_controller_cross_compiler bash -c 'cd /workspace/build/release ; cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release /workspace'
-  - docker exec -it txt_controller_cross_compiler bash -c 'cd /workspace/build/release ; cmake --build .'
+cache:
+  directories:
+    - build
+    - build/release
+    - build/test_release
+    - ${DOCKER_CACHE_FOLDER}
+
+stages:
+  - setup
+  - compile
+  - test
+
+jobs:
+  include:
+    - stage: setup
+      name: "Setup Environment"
+      script: true
+      install:
+        - docker-compose build
+        - docker save ${DOCKER_CONTAINER_NAME} | gzip -c > ${DOCKER_CACHE_FILE}
+    - stage: compile
+      name: "Compile for TXT Controller"
+      script:
+        - if [[ -f ${DOCKER_CACHE_FILE} ]]; then docker load -i ${DOCKER_CACHE_FILE}; fi
+        - docker-compose up -d
+        - docker exec -it ${DOCKER_CONTAINER_NAME} bash -c 'cd /workspace/build/release ; cmake -G "Unix Makefiles" -DBUILD_FOR_CONTROLLER=ON -DCMAKE_BUILD_TYPE=Release /workspace'
+        - docker exec -it ${DOCKER_CONTAINER_NAME} bash -c 'cd /workspace/build/release ; cmake --build .'
+    - name: "Compile Unit Tests"
+      script:
+        - if [[ -f ${DOCKER_CACHE_FILE} ]]; then docker load -i ${DOCKER_CACHE_FILE}; fi
+        - docker-compose up -d
+        - docker exec -it ${DOCKER_CONTAINER_NAME} bash -c 'cd /workspace/build/test_release ; cmake -G "Unix Makefiles" -DBUILD_TESTS=ON -DCMAKE_BUILD_TYPE=Release /workspace'
+        - docker exec -it ${DOCKER_CONTAINER_NAME} bash -c 'cd /workspace/build/test_release ; cmake --build .'
+    - stage: test
+      name: "Execute Unit Tests"
+      script:
+        - if [[ -f ${DOCKER_CACHE_FILE} ]]; then docker load -i ${DOCKER_CACHE_FILE}; fi
+        - docker exec -it ${DOCKER_CONTAINER_NAME} bash -c 'cd /workspace/build/test_release ; ctest -V'
