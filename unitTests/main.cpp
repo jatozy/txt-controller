@@ -49,11 +49,11 @@ TEST_P(PrepareMotor1, DataIsSet)
 INSTANTIATE_TEST_CASE_P(Controller,
                         PrepareMotor1,
                         ::testing::Values(
-                            std::make_tuple("OneRotation_CounterClockwise_FullSpeed", 127, 512, 0),
-                            std::make_tuple("OneRotation_Clockwise_FullSpeed", 127, 0, 512),
-                            std::make_tuple("HalfRotation_CounterClockwise_FullSpeed", 64, 512, 0),
-                            std::make_tuple("OneRotation_CounterClockwise_QuarterSpeed", 127, 128, 0),
-                            std::make_tuple("RotateForteenDegree_Clockwise_TenPercentSpeed", 5, 0, 51)),
+                            std::make_tuple("One_Rotation_Counter_Clockwise_Full_Speed", 127, 512, 0),
+                            std::make_tuple("One_Rotation_Clockwise_Full_Speed", 127, 0, 512),
+                            std::make_tuple("Half_Rotation_Counter_Clockwise_Full_Speed", 64, 512, 0),
+                            std::make_tuple("One_Rotation_Counter_Clockwise_Quarter_Speed", 127, 128, 0),
+                            std::make_tuple("14_Degree_Rotation_Clockwise_10_Percent_Speed", 5, 0, 51)),
                         PrepareMotor1::PrintToStringParamName());
 
 } // namespace
