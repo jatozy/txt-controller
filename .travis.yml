@@ -20,6 +20,7 @@ cache:
     - ${DOCKER_CACHE_FOLDER}
 
 stages:
+  - setup
   - compile
   - test
 
