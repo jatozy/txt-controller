@@ -12,6 +12,7 @@ env:
 cache:
   directories:
     - build
+    - build/release
     - build/test_release
 
 stages:
@@ -24,15 +25,15 @@ jobs:
       name: "Compile for TXT Controller"
       script:
         - docker-compose up -d
-        - docker exec -it ${DOCKER_CONTAINER_NAME} bash -c 'cd /workspace/build/release ; cmake -G "Unix Makefiles" -DBUILD_FOR_CONTROLLER=ON -DCMAKE_BUILD_TYPE=Release /workspace'
-        - docker exec -it ${DOCKER_CONTAINER_NAME} bash -c 'cd /workspace/build/release ; cmake --build .'
+        - docker exec -it txt_controller_cross_compiler bash -c 'cd /workspace/build/release ; cmake -G "Unix Makefiles" -DBUILD_FOR_CONTROLLER=ON -DCMAKE_BUILD_TYPE=Release /workspace'
+        - docker exec -it txt_controller_cross_compiler bash -c 'cd /workspace/build/release ; cmake --build .'
     - name: "Compile Unit Tests"
       script:
         - docker-compose up -d
-        - docker exec -it ${DOCKER_CONTAINER_NAME} bash -c 'cd /workspace/build/test_release ; cmake -G "Unix Makefiles" -DBUILD_TESTS=ON -DCMAKE_BUILD_TYPE=Release /workspace'
-        - docker exec -it ${DOCKER_CONTAINER_NAME} bash -c 'cd /workspace/build/test_release ; cmake --build .'
+        - docker exec -it txt_controller_cross_compiler bash -c 'cd /workspace/build/test_release ; cmake -G "Unix Makefiles" -DBUILD_TESTS=ON -DCMAKE_BUILD_TYPE=Release /workspace'
+        - docker exec -it txt_controller_cross_compiler bash -c 'cd /workspace/build/test_release ; cmake --build .'
     - stage: test
       name: "Execute Unit Tests"
       script:
         - docker-compose up -d
-        - docker exec -it ${DOCKER_CONTAINER_NAME} bash -c 'cd /workspace/build/test_release ; ctest -V'
+        - docker exec -it txt_controller_cross_compiler bash -c 'cd /workspace/build/test_release ; ctest -V'
