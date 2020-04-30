@@ -1,4 +1,4 @@
-$ImageVersion = 1.0
+$ImageVersion = 1.1
 $ImageNamePrefix = "e6r4de7ly3x6ws3g/txt-controller-toolchain"
 $ImageName = "${ImageNamePrefix}:${ImageVersion}"
 $ImageNameLatest = "${ImageNamePrefix}:latest"
