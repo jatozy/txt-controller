@@ -171,5 +171,20 @@
                 "isDefault": true
             }
         },
+        {
+            "label": "build_and_run_integration_tests_debug",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceRoot}/build/test_debug"
+            },
+            "command": "cmake --build . && ctest -V --exclude-regex \".*UnitTests.*\"",
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
     ]
 }
