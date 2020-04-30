@@ -155,6 +155,21 @@
                 "kind": "build",
                 "isDefault": true
             }
-        }
+        },
+        {
+            "label": "build_and_run_tests_debug",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceRoot}/build/test_debug"
+            },
+            "command": "cmake --build . && ctest -V",
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
     ]
 }
