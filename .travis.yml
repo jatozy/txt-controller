@@ -8,12 +8,16 @@ services:
 env:
   global:
     - DOCKER_COMPOSE_VERSION=1.25.4
+    - DOCKER_CACHE_FOLDER=${HOME}/docker-images
+    - DOCKER_CONTAINER_NAME=txt_controller_cross_compiler
+    - DOCKER_CACHE_FILE=${HOME}/docker-images/${DOCKER_CONTAINER_NAME}.tgz
 
 cache:
   directories:
     - build
     - build/release
     - build/test_release
+    - ${DOCKER_CACHE_FOLDER}
 
 stages:
   - compile
@@ -21,19 +25,31 @@ stages:
 
 jobs:
   include:
+    - stage: setup
+      name: "Setup Environment"
+      script: true
+      install:
+        - docker-compose build
+        - docker save ${DOCKER_CONTAINER_NAME} | gzip -c > ${DOCKER_CACHE_FILE}
     - stage: compile
       name: "Compile for TXT Controller"
-      script:
+      install:
+        - if [[ -f ${DOCKER_CACHE_FILE} ]]; then docker load -i ${DOCKER_CACHE_FILE}; fi
         - docker-compose up -d
+      script:
         - docker exec -it txt_controller_cross_compiler bash -c 'cd /workspace/build/release ; cmake -G "Unix Makefiles" -DBUILD_FOR_CONTROLLER=ON -DCMAKE_BUILD_TYPE=Release /workspace'
         - docker exec -it txt_controller_cross_compiler bash -c 'cd /workspace/build/release ; cmake --build .'
     - name: "Compile Unit Tests"
+    install:
+      - if [[ -f ${DOCKER_CACHE_FILE} ]]; then docker load -i ${DOCKER_CACHE_FILE}; fi
+      - docker-compose up -d
       script:
-        - docker-compose up -d
         - docker exec -it txt_controller_cross_compiler bash -c 'cd /workspace/build/test_release ; cmake -G "Unix Makefiles" -DBUILD_TESTS=ON -DCMAKE_BUILD_TYPE=Release /workspace'
         - docker exec -it txt_controller_cross_compiler bash -c 'cd /workspace/build/test_release ; cmake --build .'
     - stage: test
       name: "Execute Unit Tests"
-      script:
+      install:
+        - if [[ -f ${DOCKER_CACHE_FILE} ]]; then docker load -i ${DOCKER_CACHE_FILE}; fi
         - docker-compose up -d
+      script:
         - docker exec -it txt_controller_cross_compiler bash -c 'cd /workspace/build/test_release ; ctest -V'
