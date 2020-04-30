@@ -14,20 +14,21 @@ void jatozy::TxtController::Controller::PrepareMotor1(uint16_t distance,
                                                       int16_t rotationSpeed1,
                                                       int16_t rotationSpeed2)
 {
-    if (m_hardwareInterface) {
-        m_hardwareInterface->ftX1out.distance[0] = distance;
-        m_hardwareInterface->ftX1out.duty[0] = rotationSpeed1;
-        m_hardwareInterface->ftX1out.duty[1] = rotationSpeed2;
-    }
+    PrepareMotor(distance, rotationSpeed1, rotationSpeed2, 0, 0, 1);
 }
 
 void jatozy::TxtController::Controller::PrepareMotor2(uint16_t distance,
                                                       int16_t rotationSpeed1,
                                                       int16_t rotationSpeed2)
 {
+    PrepareMotor(distance, rotationSpeed1, rotationSpeed2, 1, 2, 3);
+}
+
+void jatozy::TxtController::Controller::PrepareMotor(uint16_t distance, int16_t rotationSpeed1, int16_t rotationSpeed2, int distanceIndex, int dutyCycleIndex1, int dutyCycleIndex2)
+{
     if (m_hardwareInterface) {
-        m_hardwareInterface->ftX1out.distance[1] = distance;
-        m_hardwareInterface->ftX1out.duty[2] = rotationSpeed1;
-        m_hardwareInterface->ftX1out.duty[3] = rotationSpeed2;
+        m_hardwareInterface->ftX1out.distance[distanceIndex] = distance;
+        m_hardwareInterface->ftX1out.duty[dutyCycleIndex1] = rotationSpeed1;
+        m_hardwareInterface->ftX1out.duty[dutyCycleIndex2] = rotationSpeed2;
     }
 }

@@ -12,6 +12,8 @@ struct Controller {
     void PrepareMotor2(uint16_t distance, int16_t rotationSpeed1, int16_t rotationSpeed2);
 
 private:
+    void PrepareMotor(uint16_t distance, int16_t rotationSpeed1, int16_t rotationSpeed2, int distanceIndex, int dutyCycleIndex1, int dutyCycleIndex2);
+    
     struct shm_if_s* m_hardwareInterface;
 };
 } // namespace jatozy::TxtController
