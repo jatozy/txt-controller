@@ -29,11 +29,14 @@ jobs:
       script:
         - docker exec -it txt_controller_cross_compiler bash -c 'cd /workspace/build/release ; cmake -G "Unix Makefiles" -DBUILD_FOR_CONTROLLER=ON -DCMAKE_BUILD_TYPE=Release /workspace'
         - docker exec -it txt_controller_cross_compiler bash -c 'cd /workspace/build/release ; cmake --build .'
-    - name: "Compile Unit Tests"
+    - name: "Compile Tests"
       script:
         - docker exec -it txt_controller_cross_compiler bash -c 'cd /workspace/build/test_release ; cmake -G "Unix Makefiles" -DBUILD_TESTS=ON -DCMAKE_BUILD_TYPE=Release /workspace'
         - docker exec -it txt_controller_cross_compiler bash -c 'cd /workspace/build/test_release ; cmake --build .'
     - stage: test
       name: "Execute Unit Tests"
       script:
-        - docker exec -it txt_controller_cross_compiler bash -c 'cd /workspace/build/test_release ; ctest -V'
+        - docker exec -it txt_controller_cross_compiler bash -c 'cd /workspace/build/test_release ; ctest -V --exclude-regex ".*IntegrationTests.*"'
+    - name: "Execute Integration Tests"
+      script:
+        - docker exec -it txt_controller_cross_compiler bash -c 'cd /workspace/build/test_release ; ctest -V --exclude-regex ".*IntegrationTests.*"'
