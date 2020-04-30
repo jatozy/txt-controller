@@ -6,6 +6,7 @@ OPTION(BUILD_TESTS "Build unit tests" OFF)
 OPTION(BUILD_FOR_CONTROLLER "Build cross for TXT Controller" OFF)
 
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/includes)
+include_directories(BEFORE ${PROJECT_SOURCE_DIR}/3rdParty/timercpp)
 
 if(BUILD_TESTS AND BUILD_FOR_CONTROLLER)
     message( FATAL_ERROR "You have set the flags so that the tests and the cross binaries shall be compiled. This is not possible. You have to compile them separately.")
@@ -14,7 +15,7 @@ elseif(NOT BUILD_TESTS AND NOT BUILD_FOR_CONTROLLER)
 elseif(BUILD_TESTS)
     set(CMAKE_C_FLAGS "-m32")
     set(CMAKE_CXX_FLAGS "-m32")
-    
+
 	enable_testing()
     add_subdirectory(3rdParty/googletest)
     add_subdirectory(unitTests)
