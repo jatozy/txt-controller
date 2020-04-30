@@ -5,9 +5,6 @@ project (TxtController)
 OPTION(BUILD_TESTS "Build unit tests" OFF)
 OPTION(BUILD_FOR_CONTROLLER "Build cross for TXT Controller" OFF)
 
-set(CMAKE_C_FLAGS "-m32")
-set(CMAKE_CXX_FLAGS "-m32")
-
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/includes)
 
 if(BUILD_TESTS AND BUILD_FOR_CONTROLLER)
@@ -15,7 +12,9 @@ if(BUILD_TESTS AND BUILD_FOR_CONTROLLER)
 elseif(NOT BUILD_TESTS AND NOT BUILD_FOR_CONTROLLER)
     message( FATAL_ERROR "You must set one of the flags BUILD_TESTS or BUILD_FOR_CONTROLLER.")
 elseif(BUILD_TESTS)
-#	set(VERSION_GTEST "1.8.0" CACHE STRING "Google Test framework version")
+    set(CMAKE_C_FLAGS "-m32")
+    set(CMAKE_CXX_FLAGS "-m32")
+    
 	enable_testing()
     add_subdirectory(3rdParty/googletest)
     add_subdirectory(unitTests)
