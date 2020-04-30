@@ -1,6 +1,6 @@
 #pragma once
 
-#include <memory>
+#include <cstdint>
 
 struct shm_if_s;
 
@@ -11,6 +11,6 @@ struct Controller {
     void PrepareMotor1(uint16_t distance, int16_t rotationSpeed1, int16_t rotationSpeed2);
 
 private:
-    std::shared_ptr<struct shm_if_s> m_hardwareInterface;
+    struct shm_if_s* m_hardwareInterface;
 };
 } // namespace jatozy::TxtController

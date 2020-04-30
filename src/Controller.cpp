@@ -7,10 +7,16 @@
 
 jatozy::TxtController::Controller::Controller(FISH_X1_TRANSFER* hardwareInterface)
 {
+    m_hardwareInterface = hardwareInterface;
 }
 
 void jatozy::TxtController::Controller::PrepareMotor1(uint16_t distance,
                                                       int16_t rotationSpeed1,
                                                       int16_t rotationSpeed2)
 {
+    if (m_hardwareInterface) {
+        m_hardwareInterface->ftX1out.distance[0] = distance;
+        m_hardwareInterface->ftX1out.duty[0] = rotationSpeed1;
+        m_hardwareInterface->ftX1out.duty[1] = rotationSpeed2;
+    }
 }
