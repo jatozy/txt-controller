@@ -9,6 +9,8 @@
 		"austin.code-gnu-globa",
 		"donjayamanne.githistory",
 		"felipecaputo.git-project-manager",
-		"eamodio.gitlens"
+		"eamodio.gitlens",
+		"schultyy.travis-ci-status",
+		"redhat.vscode-yaml"
 	]
 }

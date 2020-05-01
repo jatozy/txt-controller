@@ -42,12 +42,19 @@ void jatozy::TxtController::Controller::PrepareMotor(uint16_t distance,
 
 void jatozy::TxtController::Controller::RotateMotors()
 {
-    if(m_motor1Prepared)
-    {
+    if (m_motor1Prepared) {
         m_hardwareInterface->ftX1out.motor_ex_cmd_id[0]++;
     }
-    if(m_motor2Prepared)
-    {
+    if (m_motor2Prepared) {
         m_hardwareInterface->ftX1out.motor_ex_cmd_id[1]++;
+    }
+}
+
+void jatozy::TxtController::Controller::WaitUntilMotorsRotationFinished() const
+{
+    while (m_hardwareInterface->ftX1in.motor_ex_cmd_id[0] <
+               m_hardwareInterface->ftX1out.motor_ex_cmd_id[0] &&
+           m_hardwareInterface->ftX1in.motor_ex_cmd_id[1] <
+               m_hardwareInterface->ftX1out.motor_ex_cmd_id[1]) {
     }
 }
