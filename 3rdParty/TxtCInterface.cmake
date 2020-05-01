@@ -1,5 +1,3 @@
-include_directories(BEFORE ${PROJECT_SOURCE_DIR}/3rdParty/txt_demo_c_download/deps/include)
-
 file(GLOB TxtControllerPrecompiledLibraries
   "${PROJECT_SOURCE_DIR}/3rdParty/txt_demo_c_download/deps/lib/*.so"
 )
