@@ -155,6 +155,62 @@
                 "kind": "build",
                 "isDefault": true
             }
+        },
+        {
+            "label": "build_and_run_tests_debug",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceRoot}/build/test_debug"
+            },
+            "command": "cmake --build . && ctest -V --exclude-regex \".*IntegrationTests.*\"",
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "build_and_run_integration_tests_debug",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceRoot}/build/test_debug"
+            },
+            "command": "cmake --build . && ctest -V --exclude-regex \".*UnitTests.*\"",
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "cmake_test_application",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceRoot}/build/release"
+            },
+            "command": "cmake -G \"Unix Makefiles\" -DBUILD_FOR_CONTROLLER=ON -DBUILD_TEST_APPLICATION=ON -DCMAKE_BUILD_TYPE=Release ${workspaceRoot}",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "build_test_application",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceRoot}/build/release"
+            },
+            "command": "cmake --build .",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
         }
     ]
 }

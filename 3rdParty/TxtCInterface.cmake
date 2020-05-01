@@ -1,90 +1,88 @@
-include_directories(BEFORE ${PROJECT_SOURCE_DIR}/3rdParty/txt_demo_c_download/deps/include)
-
 file(GLOB TxtControllerPrecompiledLibraries
   "${PROJECT_SOURCE_DIR}/3rdParty/txt_demo_c_download/deps/lib/*.so"
 )
-file(COPY ${TxtControllerPrecompiledLibraries} DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/lib)
+file(COPY ${TxtControllerPrecompiledLibraries} DESTINATION ${CMAKE_BINARY_DIR}/lib)
 
 add_library(KeLibTxt UNKNOWN IMPORTED)
-set_property(TARGET KeLibTxt PROPERTY IMPORTED_LOCATION "${CMAKE_CURRENT_BINARY_DIR}/lib/libKeLibTxt.so")
+set_property(TARGET KeLibTxt PROPERTY IMPORTED_LOCATION "${CMAKE_BINARY_DIR}/lib/libKeLibTxt.so")
 
 add_library(MotorIOLib UNKNOWN IMPORTED)
-set_property(TARGET MotorIOLib PROPERTY IMPORTED_LOCATION "${CMAKE_CURRENT_BINARY_DIR}/lib/libMotorIOLib.so")
+set_property(TARGET MotorIOLib PROPERTY IMPORTED_LOCATION "${CMAKE_BINARY_DIR}/lib/libMotorIOLib.so")
 
 add_library(ROBOProLib UNKNOWN IMPORTED)
-set_property(TARGET ROBOProLib PROPERTY IMPORTED_LOCATION "${CMAKE_CURRENT_BINARY_DIR}/lib/libROBOProLib.so")
+set_property(TARGET ROBOProLib PROPERTY IMPORTED_LOCATION "${CMAKE_BINARY_DIR}/lib/libROBOProLib.so")
 
 add_library(SDL UNKNOWN IMPORTED)
-set_property(TARGET SDL PROPERTY IMPORTED_LOCATION "${CMAKE_CURRENT_BINARY_DIR}/lib/libSDL.so")
+set_property(TARGET SDL PROPERTY IMPORTED_LOCATION "${CMAKE_BINARY_DIR}/lib/libSDL.so")
 
 add_library(SDLWidgetsLib UNKNOWN IMPORTED)
-set_property(TARGET SDLWidgetsLib PROPERTY IMPORTED_LOCATION "${CMAKE_CURRENT_BINARY_DIR}/lib/libSDLWidgetsLib.so")
+set_property(TARGET SDLWidgetsLib PROPERTY IMPORTED_LOCATION "${CMAKE_BINARY_DIR}/lib/libSDLWidgetsLib.so")
 
 add_library(SDL_gfx UNKNOWN IMPORTED)
-set_property(TARGET SDL_gfx PROPERTY IMPORTED_LOCATION "${CMAKE_CURRENT_BINARY_DIR}/lib/libSDL_gfx.so")
+set_property(TARGET SDL_gfx PROPERTY IMPORTED_LOCATION "${CMAKE_BINARY_DIR}/lib/libSDL_gfx.so")
 
 add_library(SDL_image UNKNOWN IMPORTED)
-set_property(TARGET SDL_image PROPERTY IMPORTED_LOCATION "${CMAKE_CURRENT_BINARY_DIR}/lib/libSDL_image.so")
+set_property(TARGET SDL_image PROPERTY IMPORTED_LOCATION "${CMAKE_BINARY_DIR}/lib/libSDL_image.so")
 
 add_library(SDL_ttf UNKNOWN IMPORTED)
-set_property(TARGET SDL_ttf PROPERTY IMPORTED_LOCATION "${CMAKE_CURRENT_BINARY_DIR}/lib/libSDL_ttf.so")
+set_property(TARGET SDL_ttf PROPERTY IMPORTED_LOCATION "${CMAKE_BINARY_DIR}/lib/libSDL_ttf.so")
 
 add_library(TxtControlLib UNKNOWN IMPORTED)
-set_property(TARGET TxtControlLib PROPERTY IMPORTED_LOCATION "${CMAKE_CURRENT_BINARY_DIR}/lib/libTxtControlLib.so")
+set_property(TARGET TxtControlLib PROPERTY IMPORTED_LOCATION "${CMAKE_BINARY_DIR}/lib/libTxtControlLib.so")
 
 add_library(asound UNKNOWN IMPORTED)
-set_property(TARGET asound PROPERTY IMPORTED_LOCATION "${CMAKE_CURRENT_BINARY_DIR}/lib/libasound.so")
+set_property(TARGET asound PROPERTY IMPORTED_LOCATION "${CMAKE_BINARY_DIR}/lib/libasound.so")
 
 add_library(bz2 UNKNOWN IMPORTED)
-set_property(TARGET bz2 PROPERTY IMPORTED_LOCATION "${CMAKE_CURRENT_BINARY_DIR}/lib/libbz2.so")
+set_property(TARGET bz2 PROPERTY IMPORTED_LOCATION "${CMAKE_BINARY_DIR}/lib/libbz2.so")
 
 add_library(crypto UNKNOWN IMPORTED)
-set_property(TARGET crypto PROPERTY IMPORTED_LOCATION "${CMAKE_CURRENT_BINARY_DIR}/lib/libcrypto.so")
+set_property(TARGET crypto PROPERTY IMPORTED_LOCATION "${CMAKE_BINARY_DIR}/lib/libcrypto.so")
 
 add_library(freefare UNKNOWN IMPORTED)
-set_property(TARGET freefare PROPERTY IMPORTED_LOCATION "${CMAKE_CURRENT_BINARY_DIR}/lib/libfreefare.so")
+set_property(TARGET freefare PROPERTY IMPORTED_LOCATION "${CMAKE_BINARY_DIR}/lib/libfreefare.so")
 
 add_library(freetype UNKNOWN IMPORTED)
-set_property(TARGET freetype PROPERTY IMPORTED_LOCATION "${CMAKE_CURRENT_BINARY_DIR}/lib/libfreetype.so")
+set_property(TARGET freetype PROPERTY IMPORTED_LOCATION "${CMAKE_BINARY_DIR}/lib/libfreetype.so")
 
 add_library(jpeg UNKNOWN IMPORTED)
-set_property(TARGET jpeg PROPERTY IMPORTED_LOCATION "${CMAKE_CURRENT_BINARY_DIR}/lib/libjpeg.so")
+set_property(TARGET jpeg PROPERTY IMPORTED_LOCATION "${CMAKE_BINARY_DIR}/lib/libjpeg.so")
 
 add_library(jsoncpp UNKNOWN IMPORTED)
-set_property(TARGET jsoncpp PROPERTY IMPORTED_LOCATION "${CMAKE_CURRENT_BINARY_DIR}/lib/libjsoncpp.so")
+set_property(TARGET jsoncpp PROPERTY IMPORTED_LOCATION "${CMAKE_BINARY_DIR}/lib/libjsoncpp.so")
 
 add_library(nfc UNKNOWN IMPORTED)
-set_property(TARGET nfc PROPERTY IMPORTED_LOCATION "${CMAKE_CURRENT_BINARY_DIR}/lib/libnfc.so")
+set_property(TARGET nfc PROPERTY IMPORTED_LOCATION "${CMAKE_BINARY_DIR}/lib/libnfc.so")
 
 add_library(opencv_core UNKNOWN IMPORTED)
-set_property(TARGET opencv_core PROPERTY IMPORTED_LOCATION "${CMAKE_CURRENT_BINARY_DIR}/lib/libopencv_core.so")
+set_property(TARGET opencv_core PROPERTY IMPORTED_LOCATION "${CMAKE_BINARY_DIR}/lib/libopencv_core.so")
 
 add_library(opencv_imgcodecs UNKNOWN IMPORTED)
-set_property(TARGET opencv_imgcodecs PROPERTY IMPORTED_LOCATION "${CMAKE_CURRENT_BINARY_DIR}/lib/libopencv_imgcodecs.so")
+set_property(TARGET opencv_imgcodecs PROPERTY IMPORTED_LOCATION "${CMAKE_BINARY_DIR}/lib/libopencv_imgcodecs.so")
 
 add_library(opencv_imgproc UNKNOWN IMPORTED)
-set_property(TARGET opencv_imgproc PROPERTY IMPORTED_LOCATION "${CMAKE_CURRENT_BINARY_DIR}/lib/libopencv_imgproc.so")
+set_property(TARGET opencv_imgproc PROPERTY IMPORTED_LOCATION "${CMAKE_BINARY_DIR}/lib/libopencv_imgproc.so")
 
 add_library(opencv_videoio UNKNOWN IMPORTED)
-set_property(TARGET opencv_videoio PROPERTY IMPORTED_LOCATION "${CMAKE_CURRENT_BINARY_DIR}/lib/libopencv_videoio.so")
+set_property(TARGET opencv_videoio PROPERTY IMPORTED_LOCATION "${CMAKE_BINARY_DIR}/lib/libopencv_videoio.so")
 
 add_library(paho-mqtt3a UNKNOWN IMPORTED)
-set_property(TARGET paho-mqtt3a PROPERTY IMPORTED_LOCATION "${CMAKE_CURRENT_BINARY_DIR}/lib/libpaho-mqtt3a.so")
+set_property(TARGET paho-mqtt3a PROPERTY IMPORTED_LOCATION "${CMAKE_BINARY_DIR}/lib/libpaho-mqtt3a.so")
 
 add_library(paho-mqtt3c UNKNOWN IMPORTED)
-set_property(TARGET paho-mqtt3c PROPERTY IMPORTED_LOCATION "${CMAKE_CURRENT_BINARY_DIR}/lib/libpaho-mqtt3c.so")
+set_property(TARGET paho-mqtt3c PROPERTY IMPORTED_LOCATION "${CMAKE_BINARY_DIR}/lib/libpaho-mqtt3c.so")
 
 add_library(paho-mqttpp3 UNKNOWN IMPORTED)
-set_property(TARGET paho-mqttpp3 PROPERTY IMPORTED_LOCATION "${CMAKE_CURRENT_BINARY_DIR}/lib/libpaho-mqttpp3.so")
+set_property(TARGET paho-mqttpp3 PROPERTY IMPORTED_LOCATION "${CMAKE_BINARY_DIR}/lib/libpaho-mqttpp3.so")
 
 add_library(png16 UNKNOWN IMPORTED)
-set_property(TARGET png16 PROPERTY IMPORTED_LOCATION "${CMAKE_CURRENT_BINARY_DIR}/lib/libpng16.so")
+set_property(TARGET png16 PROPERTY IMPORTED_LOCATION "${CMAKE_BINARY_DIR}/lib/libpng16.so")
 
 add_library(ts UNKNOWN IMPORTED)
-set_property(TARGET ts PROPERTY IMPORTED_LOCATION "${CMAKE_CURRENT_BINARY_DIR}/lib/libts.so")
+set_property(TARGET ts PROPERTY IMPORTED_LOCATION "${CMAKE_BINARY_DIR}/lib/libts.so")
 
 add_library(z UNKNOWN IMPORTED)
-set_property(TARGET z PROPERTY IMPORTED_LOCATION "${CMAKE_CURRENT_BINARY_DIR}/lib/libz.so")
+set_property(TARGET z PROPERTY IMPORTED_LOCATION "${CMAKE_BINARY_DIR}/lib/libz.so")
 
 set(TXT_C_LIBRARY_LIBS KeLibTxt)
 LIST(APPEND TXT_C_LIBRARY_LIBS "MotorIOLib")
