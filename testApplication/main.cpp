@@ -1,70 +1,47 @@
-/**********************************************************
- *  Compiler:   gcc / g++
- * 
- *  Demonstration of working with the Transfer Area
- *  Connections
- *  M1: Encoder Motor with Signal to Clock C1 Inputs
- * 
- *  Demo_02:
- *  - Start Transfer with StartTxtDownloadProg()
- *  - Gets the Address from the Transfer Area with GetKeLibTransferAreaMainAddress()
- *  - Switch Encoder Motor on M1 for 2 turns on and drive back
- **********************************************************/
-#include <stdio.h>          // for printf()
-#include <unistd.h>         // for sleep()
+#include <TxtController/Controller.hpp>
+#include <chrono>
+#include <cstdio>
+#include <iostream>
+#include <thread>
 
-#include "KeLibTxtDl.h"     // TXT Lib
-#include "FtShmem.h"        // TXT Transfer Area
+// clang-format off
+#include <KeLibTxtDl.h>
+#include <FtShmem.h>
+// clang-format on
 
-// Common debugging stuff for RoboProLib
+// The following global variables are needed from the libROBOProLib.so
 unsigned int DebugFlags;
-FILE *DebugFile;
+FILE* DebugFile;
 
-
-int main(void) 
+int main(void)
 {
-	FISH_X1_TRANSFER    *pTArea;
-	if (StartTxtDownloadProg() == KELIB_ERROR_NONE)
-	{
-		pTArea = GetKeLibTransferAreaMainAddress();
-		if (pTArea)
-		{   // It's a real pointer
+    FISH_X1_TRANSFER* hardwareInterface = nullptr;
+    if (StartTxtDownloadProg() == KELIB_ERROR_NONE) {
+        hardwareInterface = GetKeLibTransferAreaMainAddress();
+        if (hardwareInterface) {
+            jatozy::TxtController::Controller controller(hardwareInterface);
 
-			// Switch M1 - Encoder Motor on for 2 turns
-			// Note: the range of the motor duty cycle values is 0..512
+            controller.PrepareMotor1(255, 256, 0);
+            controller.PrepareMotor2(255, 256, 0);
+            controller.RotateMotors();
 
-			// Step 1: Switch Motor on (with a distance from 127 Clocks for 2 turns)
-			pTArea->ftX1out.distance[0] = 256;                  // Distance to drive Motor 1 [0]
-			pTArea->ftX1out.motor_ex_cmd_id[0]++;               // Set new Distance Value for Motor 1 [0]
-			pTArea->ftX1out.duty[0] = 127;                      // Switch Motor 1 ( O1 [0] ) on with PWM Value 512 (= max speed)
-			pTArea->ftX1out.duty[1] = 0;                        // Switch Motor 1 ( O2 [1] ) with minus
+            std::cout << "wait until motors are rotated." << std::endl;
+            controller.WaitUntilMotorsRotationFinished();
+            std::cout << "waiting finshed." << std::endl;
 
-			while (pTArea->ftX1in.motor_ex_cmd_id[0] < pTArea->ftX1out.motor_ex_cmd_id[0])
-			{
-				printf("1:OutExCmd: %d  InExCmd: %d  Counter: %d  \n",
-						pTArea->ftX1out.motor_ex_cmd_id[0], pTArea->ftX1in.motor_ex_cmd_id[0], pTArea->ftX1in.counter[0]);
-			};
+            std::cout << "wait some seconds before the motors are rotated back."
+                      << std::endl;
+            std::this_thread::sleep_for(std::chrono::seconds(5));
 
-			printf("2:OutExCmd: %d  InExCmd: %d  Counter: %d  \n",
-					pTArea->ftX1out.motor_ex_cmd_id[0], pTArea->ftX1in.motor_ex_cmd_id[0], pTArea->ftX1in.counter[0]);
-			sleep(1);
+            controller.PrepareMotor1(511, 0, 512);
+            controller.PrepareMotor2(511, 0, 512);
+            controller.RotateMotors();
 
-			// Step 3: Run back to zero
-			pTArea->ftX1out.distance[0] = pTArea->ftX1in.counter[0];    // Distance to go back
-			pTArea->ftX1out.motor_ex_cmd_id[0]++;                       // Set new Distance Value for Motor 1 [0]
-			pTArea->ftX1out.duty[0] = 0;                                // Switch Motor 1 ( O1 [0] ) with minus
-			pTArea->ftX1out.duty[1] = 256;                              // Switch Motor 1 ( O2 [1] ) on with PWM Value 512 (= max speed)
-
-			while (pTArea->ftX1in.motor_ex_cmd_id[0] < pTArea->ftX1out.motor_ex_cmd_id[0])
-			{
-				printf("3:OutExCmd: %d  InExCmd: %d  Counter: %d  \n",
-						pTArea->ftX1out.motor_ex_cmd_id[0], pTArea->ftX1in.motor_ex_cmd_id[0], pTArea->ftX1in.counter[0]);
-			};
-
-			printf("4:OutExCmd: %d  InExCmd: %d  Counter: %d  \n",
-					pTArea->ftX1out.motor_ex_cmd_id[0], pTArea->ftX1in.motor_ex_cmd_id[0], pTArea->ftX1in.counter[0]);
-		}
-		StopTxtDownloadProg();
-	}
-	return 0;
+            std::cout << "wait until motors are rotated." << std::endl;
+            controller.WaitUntilMotorsRotationFinished();
+            std::cout << "waiting finshed." << std::endl;
+        }
+        StopTxtDownloadProg();
+    }
+    return 0;
 }

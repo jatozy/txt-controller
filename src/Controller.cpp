@@ -1,5 +1,8 @@
 #include "TxtController/Controller.hpp"
 
+#include <chrono>
+#include <thread>
+
 // clang-format off
 #include <KeLibTxtDl.h>
 #include <FtShmem.h>
@@ -56,5 +59,6 @@ void jatozy::TxtController::Controller::WaitUntilMotorsRotationFinished() const
                m_hardwareInterface->ftX1out.motor_ex_cmd_id[0] &&
            m_hardwareInterface->ftX1in.motor_ex_cmd_id[1] <
                m_hardwareInterface->ftX1out.motor_ex_cmd_id[1]) {
+        std::this_thread::sleep_for(std::chrono::milliseconds(7));
     }
 }

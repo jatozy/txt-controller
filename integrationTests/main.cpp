@@ -54,10 +54,11 @@ TEST_P(MoveMotors, MoveMotors)
         },
         100);
 
+    bool timeoutHappened{false};
     t.setTimeout(
         [&]() {
             t.stop();
-            abort();
+            timeoutHappened = true;
         },
         1000);
 
@@ -65,14 +66,15 @@ TEST_P(MoveMotors, MoveMotors)
     controller->RotateMotors();
     controller->WaitUntilMotorsRotationFinished();
     t.stop();
+
+    EXPECT_FALSE(timeoutHappened);
 }
 
-INSTANTIATE_TEST_CASE_P(
-    ControllerIntegrationTests,
-    MoveMotors,
-    ::testing::Values(
-        std::make_tuple("Move_Both_Motors_Counter_Clockwise", 127, 512, 0)),
-    MoveMotors::PrintToStringParamName());
+INSTANTIATE_TEST_CASE_P(ControllerIntegrationTests,
+                        MoveMotors,
+                        ::testing::Values(std::make_tuple(
+                            "Move_Both_Motors_Counter_Clockwise", 127, 512, 0)),
+                        MoveMotors::PrintToStringParamName());
 } // namespace
 
 int main(int argc, char** argv)
