@@ -4,6 +4,7 @@ project (TxtController)
 
 OPTION(BUILD_TESTS "Build unit tests" OFF)
 OPTION(BUILD_FOR_CONTROLLER "Build cross for TXT Controller" OFF)
+OPTION(BUILD_TEST_APPLICATION "Build the test application cross for TXT Controller" OFF)
 
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/includes)
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/3rdParty/timercpp)
@@ -28,10 +29,15 @@ elseif(BUILD_FOR_CONTROLLER)
     
     set(CMAKE_C_COMPILER /opt/compiler/bin/arm-linux-gnueabihf-gcc)
     set(CMAKE_CXX_COMPILER /opt/compiler/bin/arm-linux-gnueabihf-g++)
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,-rpath='$ORIGIN'")
     
     set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
     set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
     set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
+
+    if(BUILD_TEST_APPLICATION)
+        add_subdirectory(testApplication)
+    endif()
 endif()
 
 add_subdirectory(src)

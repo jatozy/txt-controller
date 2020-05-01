@@ -185,6 +185,32 @@
                 "kind": "build",
                 "isDefault": true
             }
+        },
+        {
+            "label": "cmake_test_application",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceRoot}/build/release"
+            },
+            "command": "cmake -G \"Unix Makefiles\" -DBUILD_FOR_CONTROLLER=ON -DBUILD_TEST_APPLICATION=ON -DCMAKE_BUILD_TYPE=Release ${workspaceRoot}",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "build_test_application",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceRoot}/build/release"
+            },
+            "command": "cmake --build .",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
         }
     ]
 }
