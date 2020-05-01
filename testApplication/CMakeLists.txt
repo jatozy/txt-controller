@@ -8,9 +8,6 @@ endif()
 ADD_EXECUTABLE(TestApplication main.cpp)
 set_property(TARGET TestApplication PROPERTY CXX_STANDARD 14)
 
-include(${CMAKE_SOURCE_DIR}/3rdParty/TxtCInterface.cmake)
-
 TARGET_LINK_LIBRARIES(TestApplication
     PRIVATE TxtController
-#    PRIVATE ${TXT_C_LIBRARY_LIBS}
     )
